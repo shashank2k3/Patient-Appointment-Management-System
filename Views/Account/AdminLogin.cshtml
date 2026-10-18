@@ -1,0 +1,61 @@
+﻿@model Patient_Appointment_Management_System.ViewModels.AdminLoginViewModel
+@{
+    ViewData["Title"] = "Admin Login";
+    // Adjust layout if needed, e.g., Layout = null; for a standalone login page, or your admin layout
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Or _AdminLayout.cshtml or null
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <h2 class="text-center">@ViewData["Title"]</h2>
+        <hr />
+        <form asp-action="AdminLogin" method="post">
+            @* Display general model errors (not tied to a specific property) *@
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+            @if (TempData["ForgotPasswordMessage"] != null)
+            {
+                <div class="alert alert-info">@TempData["ForgotPasswordMessage"]</div>
+            }
+
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" autofocus />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            @Html.AntiForgeryToken() @* Important for security *@
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+
+            <div class="mt-3 text-center">
+                <a asp-action="AdminForgotPassword" asp-controller="Admin">Forgot your password?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

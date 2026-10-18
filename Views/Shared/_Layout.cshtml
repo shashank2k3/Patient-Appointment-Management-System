@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HS Hospital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- ======================= STYLES WITH COLOR ======================= -->
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            margin: 0;
+            background-color: #f4f7f9; /* A soft, light grey for the overall background */
+        }
+
+        .hospital-logo {
+            width: 80px;
+            margin-right: 15px;
+        }
+
+        /* This ensures the main content area grows to push the footer down */
+        main {
+            flex: 1 0 auto;
+        }
+
+        /* This ensures the footer does not shrink */
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+    <!-- ===================== END OF STYLES ===================== -->
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <header>
+        <!-- The header remains blue, providing a strong, branded top bar -->
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <img src="https://www.creativefabrica.com/wp-content/uploads/2018/11/Hospital-logo-by-meisuseno-5.jpg" alt="Hospital Logo" class="rounded-pill hospital-logo">
+                    HS Hospital
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Bengaluru</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Chennai</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hyderabad</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- The main content area will use the light grey background from the body style -->
+    <main role="main" class="py-4">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- ======================= FOOTER COLOR CHANGE ======================= -->
+    <!-- The footer is now blue to match the header, with white text for contrast -->
+    <footer class="text-center footer bg-primary text-white">
+        <div class="container p-3">
+            &copy; @DateTime.Now.Year - HS Hospital Bangalore. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
